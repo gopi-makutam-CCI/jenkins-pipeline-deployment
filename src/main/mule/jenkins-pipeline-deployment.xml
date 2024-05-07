@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c454eeb7-4e1a-47aa-81cf-5866d183e989" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="jenkins-pipeline-deployment-flow" doc:id="47ad5135-1bb6-40b2-a921-6e7058ce3460" >
+		<http:listener doc:name="Listener" doc:id="0b0f57fc-0539-4bcf-a1da-4de452b433ea" config-ref="HTTP_Listener_config" path="/pipiline-test"/>
+		<logger level="INFO" doc:name="Start" doc:id="6ae20b57-27bb-439c-a4fa-618f98730235" message='#[{&#10;	"Flow has Started": flow.name&#10;}]'/>
+		<set-payload value='#["Deployed the application to CloudHub using Jenkins pipeline"]' doc:name="Set Payload" doc:id="6e3e1f25-c241-44fb-ba9b-6df14886307f" />
+		<logger level="INFO" doc:name="End" doc:id="886594e4-f032-4f58-9e38-c744d525c779" message='#[{&#10;	"Flow has Started": flow.name&#10;}]'/>
+	</flow>
+</mule>
